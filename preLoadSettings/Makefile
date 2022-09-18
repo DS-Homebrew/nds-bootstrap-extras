@@ -13,14 +13,18 @@ endif
 #---------------------------------------------------------------------------------
 OUTPUT_DIR		:=	.
 
-FILES		:= files
+FILESDSI		:= files-dsi
+FILES3DS		:= files-3ds
 
 #---------------------------------------------------------------------------------
 # Goals for Build
 #---------------------------------------------------------------------------------
 .PHONY:
 
-all:	$(OUTPUT_DIR)/preLoadSettings.pck
+all:	$(OUTPUT_DIR)/preLoadSettingsDSi.pck $(OUTPUT_DIR)/preLoadSettings3DS.pck
 
-$(OUTPUT_DIR)/preLoadSettings.pck: $(FILES)
+$(OUTPUT_DIR)/preLoadSettingsDSi.pck: $(FILESDSI)
+	$(PYTHON) pack.py $^ -o $@
+
+$(OUTPUT_DIR)/preLoadSettings3DS.pck: $(FILES3DS)
 	$(PYTHON) pack.py $^ -o $@
