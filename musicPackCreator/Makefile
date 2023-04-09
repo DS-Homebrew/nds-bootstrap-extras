@@ -1,12 +1,6 @@
-ifneq (,$(shell which python3))
-PYTHON	:= python3
-else ifneq (,$(shell which python2))
-PYTHON	:= python2
-else ifneq (,$(shell which python))
-PYTHON	:= python
-else
-$(error "Python not found in PATH, please install it.")
-endif
+PACK_PY	:=	$(shell pwd)/pack.py
+
+include ../rules.mk
 
 #---------------------------------------------------------------------------------
 # OUTPUT_DIR is the directory where final published files will be placed
@@ -23,4 +17,7 @@ MUSICFILES		:= raw
 all:	$(OUTPUT_DIR)/music.pck
 
 $(OUTPUT_DIR)/music.pck: $(MUSICFILES)
-	$(PYTHON) pack.py $^ -o $@
+	$(PACK) $^ -o $@
+
+clean:
+	rm -f $(OUTPUT_DIR)/*.pck
